@@ -374,6 +374,9 @@ module ActiveMerchant #:nodoc:
       def post_data(action, parameters = {})
         add_pair parameters, 'Operation', action
         add_signature(parameters)
+        logger.debug "************ Params to be sent begins ************"
+        logger.debug parameters.to_query
+        logger.debug "************ Params to be sent ends ************"
         parameters.to_query
       end
 
