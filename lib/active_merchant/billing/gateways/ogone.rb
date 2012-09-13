@@ -240,6 +240,8 @@ module ActiveMerchant #:nodoc:
       end
 
       def add_payment_source(post, payment_source, options)
+        # Add d3d param for both Alias and CreditCard payment source
+        add_d3d(post, options) if options[:d3d]
         if payment_source.is_a?(String)
           add_alias(post, payment_source, options[:alias_operation])
           add_eci(post, options[:eci] || '9')
@@ -250,7 +252,6 @@ module ActiveMerchant #:nodoc:
           end
           add_alias(post, options[:billing_id], options[:alias_operation])
           add_eci(post, options[:eci] || '7')
-          add_d3d(post, options) if options[:d3d]
           add_creditcard(post, payment_source)
         end
       end
