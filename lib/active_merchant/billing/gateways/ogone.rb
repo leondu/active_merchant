@@ -1,5 +1,6 @@
 # coding: utf-8
 require 'rexml/document'
+require 'logger'
 
 module ActiveMerchant #:nodoc:
   module Billing #:nodoc:
@@ -374,6 +375,7 @@ module ActiveMerchant #:nodoc:
       def post_data(action, parameters = {})
         add_pair parameters, 'Operation', action
         add_signature(parameters)
+        logger = Logger.new(STDOUT)
         logger.debug "************ Params to be sent begins ************"
         logger.debug parameters.to_query
         logger.debug "************ Params to be sent ends ************"
